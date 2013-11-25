@@ -1,0 +1,21 @@
+{
+  "name": "retsly-backbone",
+  "repo": "Retsly/retsly-js-backbone",
+  "description": "Retsly with Backbone",
+  "version": "0.0.1",
+  "dependencies": {
+    "retsly/retsly-js-sdk": "51cdcba",
+    "jashkenas/underscore": "*",
+    "jashkenas/backbone": "*",
+    "components/jquery": "*"
+  },
+  "development": {
+    "timoxley/assert": "*",
+    "visionmedia/mocha": "1.14.0"
+  },
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": [
+    "index.js"
+  ]
+}
