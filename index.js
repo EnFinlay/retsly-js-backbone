@@ -3,11 +3,11 @@
  * Dependencies
  */
 var Backbone = window.Backbone || require('backbone');
+var $ = Backbone.$ = require('jquery');
 var extend = require('underscore').extend;
 var result = require('underscore').result;
 var each = require('underscore').each;
 var Retsly = require('retsly-js-sdk');
-var $ = require('jquery');
 
 
 /**

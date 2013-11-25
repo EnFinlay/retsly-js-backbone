@@ -4,7 +4,7 @@
   "description": "Retsly with Backbone",
   "version": "0.0.1",
   "dependencies": {
-    "retsly/retsly-js-sdk": "7e36fda",
+    "retsly/retsly-js-sdk": "0.2.0",
     "jashkenas/underscore": "*",
     "jashkenas/backbone": "*",
     "components/jquery": "*"
