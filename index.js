@@ -17,37 +17,6 @@ module.exports = Retsly;
 
 
 /**
- * Retsly singleton
- */
-var _retsly
-  , _client
-  , _opts;
-
-/**
- * TODO describe this crazy monster (see tests)
- * @return {Retsly}
- * @api public
- */
-Retsly.create = function create (client, opts) {
-  var s = !arguments.length;
-  client = client || _client;
-  opts = opts || _opts;
-  if (!s && !client) throw new Error('call Retsly.create() with client id and options');
-  return (s && _retsly) ? _retsly : (_retsly = new Retsly(client, opts));
-}
-
-Retsly.client = function (id) {
-  _client = id;
-  return Retsly;
-}
-
-Retsly.options = function (opts) {
-  _opts = opts;
-  return Retsly;
-}
-
-
-/**
  * Public Retsly Section / View Helpers
  */
 Retsly.Section = Backbone.View.extend({
@@ -77,14 +46,14 @@ var Model = Retsly.Model = Backbone.Model.extend({
     this.mls_id = options.mls_id;
   },
   url: function() {
-    return ['',
+    return [
         this.options.urlBase,
         this.fragment,
         this.mls_id,
         this.get('_id')
       ].join('/')+'.json';
   }
-})
+});
 
 /**
  * Retsly Parent Collection
@@ -92,7 +61,6 @@ var Model = Retsly.Model = Backbone.Model.extend({
 var Collection = Retsly.Collection = Backbone.Collection.extend({
   transport: 'socket',
   initialize: function(attrs, options) {
-
     if (options && !options.mls_id)
       throw new Error('requires mls_id `{mls_id: mls.id}`');
 
@@ -101,10 +69,11 @@ var Collection = Retsly.Collection = Backbone.Collection.extend({
     this.mls_id = options.mls_id;
   },
   model: function(attrs, opts) {
-    return new this.Model(attrs, opts);
+    var col = opts.collection;
+    return new col.Model(attrs, { collection: col, mls_id: col.mls_id });
   },
   url: function() {
-    return ['',
+    return [
         this.options.urlBase,
         this.fragment,
         this.mls_id
