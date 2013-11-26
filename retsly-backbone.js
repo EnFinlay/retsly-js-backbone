@@ -4810,8 +4810,8 @@ function setCookie (name, value, days) {
  */
 function getDomain () {
   var domain = 'rets.io:443';
-  if (~document.domain.indexOf('dev.rets.ly')) domain = 'dev.rets.io:443';
-  if (~document.domain.indexOf('stg.rets.ly')) domain = 'stg.rets.io:443';
+  if (~document.domain.indexOf('dev.rets')) domain = 'dev.rets.io:443';
+  if (~document.domain.indexOf('stg.rets')) domain = 'stg.rets.io:443';
   return domain;
 }
 
@@ -16609,19 +16609,19 @@ var Model = Retsly.Model = Backbone.Model.extend({
   transport: 'socket',
   initialize: function(attrs, options) {
 
-    if (options && !options.mls_id)
-      throw new Error('requires mls_id `{mls_id: mls.id}`');
+    if (options && !options.vendor_id)
+      throw new Error('requires vendor_id `{vendor_id: \'id\'}`');
 
     this.retsly = Retsly.create();
     this.options = extend({urlBase:'/api/v1'}, options); // TODO ??
     this.collection = options.collection;
-    this.mls_id = options.mls_id;
+    this.vendor_id = options.vendor_id;
   },
   url: function() {
     return [
         this.options.urlBase,
         this.fragment,
-        this.mls_id,
+        this.vendor_id,
         this.get('_id')
       ].join('/')+'.json';
   }
@@ -16633,22 +16633,22 @@ var Model = Retsly.Model = Backbone.Model.extend({
 var Collection = Retsly.Collection = Backbone.Collection.extend({
   transport: 'socket',
   initialize: function(attrs, options) {
-    if (options && !options.mls_id)
-      throw new Error('requires mls_id `{mls_id: mls.id}`');
+    if (options && !options.vendor_id)
+      throw new Error('requires vendor_id `{vendor_id: \'id\'}`');
 
     this.retsly = Retsly.create();
     this.options = extend({urlBase: '/api/v1'}, options);
-    this.mls_id = options.mls_id;
+    this.vendor_id = options.vendor_id;
   },
   model: function(attrs, opts) {
     var col = opts.collection;
-    return new col.Model(attrs, { collection: col, mls_id: col.mls_id });
+    return new col.Model(attrs, { collection: col, vendor_id: col.vendor_id });
   },
   url: function() {
     return [
         this.options.urlBase,
         this.fragment,
-        this.mls_id
+        this.vendor_id
       ].join('/')+'.json';
   }
 });

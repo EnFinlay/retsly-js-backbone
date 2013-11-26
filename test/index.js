@@ -30,7 +30,7 @@ test('Model#url()', function () {
     get: function(){return 'qux'},
     options: {urlBase:'/foo'},
     fragment: 'bar',
-    mls_id: 'baz'
+    vendor_id: 'baz'
   };
   assert(Retsly.Model.prototype.url.call(mock) == '/foo/bar/baz/qux.json');
 });

@@ -15,7 +15,7 @@ TODO non-component usage
     var Retsly = require('retsly-backbone')
     Retsly.create('CLIENT_ID');
 
-    var listing = new Retsly.Models.Listing({_id: id, mls_id: mls});
+    var listing = new Retsly.Models.Listing({_id: id, vendor_id: vendor});
 
     listing.fetch({success: function (listing) {
       // do something with listing
