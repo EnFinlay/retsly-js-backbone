@@ -4,11 +4,13 @@
   "description": "Retsly with Backbone",
   "version": "0.0.1",
   "dependencies": {
-    "retsly/retsly-js-sdk": "0.2.0",
     "jashkenas/underscore": "*",
     "jashkenas/backbone": "*",
     "components/jquery": "*"
   },
+  "local": [
+    "retsly-js-sdk"
+  ],
   "development": {
     "timoxley/assert": "*",
     "visionmedia/mocha": "1.14.0"
