@@ -6,7 +6,7 @@
   "dependencies": {
     "jashkenas/underscore": "*",
     "jashkenas/backbone": "*",
-    "components/jquery": "*"
+    "components/jquery": "1.10.2"
   },
   "local": [
     "retsly-js-sdk"
