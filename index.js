@@ -43,7 +43,7 @@ var Model = Retsly.Model = Backbone.Model.extend({
     this.retsly = Retsly.create();
     this.options = extend({urlBase:'/api/v1'}, options); // TODO ??
     this.collection = options.collection;
-    this.vendor_id = options.vendor_id;
+    this.vendor_id = this.options.vendor_id;
   },
   url: function() {
     return [
@@ -66,7 +66,7 @@ var Collection = Retsly.Collection = Backbone.Collection.extend({
 
     this.retsly = Retsly.create();
     this.options = extend({urlBase: '/api/v1'}, options);
-    this.vendor_id = options.vendor_id;
+    this.vendor_id = this.options.vendor_id;
   },
   model: function(attrs, opts) {
     var col = opts.collection;
@@ -115,6 +115,8 @@ collections.Photos = Collection.extend({
   }
 });
 
+// Mongo-friendly by default
+Backbone.Model.prototype.idAttribute = '_id';
 
 /**
  * HTTP uses response.bundle, sockets use response. Normalize them.
