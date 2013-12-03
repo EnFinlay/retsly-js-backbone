@@ -51,7 +51,7 @@ var Model = Retsly.Model = Backbone.Model.extend({
         this.fragment,
         this.vendor_id,
         this.get('_id')
-      ].join('/')+'.json';
+      ].join('/');
   }
 });
 
@@ -77,7 +77,7 @@ var Collection = Retsly.Collection = Backbone.Collection.extend({
         this.options.urlBase,
         this.fragment,
         this.vendor_id
-      ].join('/')+'.json';
+      ].join('/');
   }
 });
 
