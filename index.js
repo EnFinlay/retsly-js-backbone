@@ -37,19 +37,19 @@ var Model = Retsly.Model = Backbone.Model.extend({
   transport: 'socket',
   initialize: function(attrs, options) {
 
-    if (options && !options.vendor_id)
-      throw new Error('requires vendor_id `{vendor_id: \'id\'}`');
+    if (options && !options.vendorID)
+      throw new Error('requires vendorID `{vendorID: \'id\'}`');
 
     this.retsly = Retsly.create();
     this.options = extend({urlBase:'/api/v1'}, options); // TODO ??
     this.collection = options.collection;
-    this.vendor_id = this.options.vendor_id;
+    this.vendorID = this.options.vendorID;
   },
   url: function() {
     return [
         this.options.urlBase,
         this.fragment,
-        this.vendor_id,
+        this.vendorID,
         this.get('_id')
       ].join('/');
   }
@@ -61,22 +61,22 @@ var Model = Retsly.Model = Backbone.Model.extend({
 var Collection = Retsly.Collection = Backbone.Collection.extend({
   transport: 'socket',
   initialize: function(attrs, options) {
-    if (options && !options.vendor_id)
-      throw new Error('requires vendor_id `{vendor_id: \'id\'}`');
+    if (options && !options.vendorID)
+      throw new Error('requires vendorID `{vendorID: \'id\'}`');
 
     this.retsly = Retsly.create();
     this.options = extend({urlBase: '/api/v1'}, options);
-    this.vendor_id = this.options.vendor_id;
+    this.vendorID = this.options.vendorID;
   },
   model: function(attrs, opts) {
     var col = opts.collection;
-    return new col.Model(attrs, { collection: col, vendor_id: col.vendor_id });
+    return new col.Model(attrs, { collection: col, vendorID: col.vendorID });
   },
   url: function() {
     return [
         this.options.urlBase,
         this.fragment,
-        this.vendor_id
+        this.vendorID
       ].join('/');
   }
 });
