@@ -8,8 +8,6 @@ Install with [component](https://github.com/component/component):
 
     $ component install retsly/retsly-js-backbone
 
-TODO non-component usage
-
 ## Usage
 
 ```javascript
