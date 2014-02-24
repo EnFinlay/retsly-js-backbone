@@ -1,4 +1,4 @@
-# retsly-js-backbone
+# retsly-js-backbone [![wercker status](https://app.wercker.com/status/c1c25d0ddf4917a14fd0de23e515fed6/s/ "wercker status")](https://app.wercker.com/project/bykey/c1c25d0ddf4917a14fd0de23e515fed6)
 
 Use [Retsly](https://rets.ly/) with Backbone.
 
