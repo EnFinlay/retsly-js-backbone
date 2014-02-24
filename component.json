@@ -7,7 +7,7 @@
     "jashkenas/underscore": "*",
     "jashkenas/backbone": "*",
     "components/jquery": "1.10.2",
-    "Retsly/retsly-js-sdk": "*"
+    "retsly/retsly-js-sdk": "*"
   },
   "local": [ ],
   "development": {
