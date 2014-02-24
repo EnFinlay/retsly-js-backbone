@@ -32,5 +32,5 @@ test('Model#url()', function () {
     fragment: 'bar',
     vendorID: 'baz'
   };
-  assert(Retsly.Model.prototype.url.call(mock) == '/foo/bar/baz/qux.json');
+  assert(Retsly.Model.prototype.url.call(mock) === '/foo/bar/baz/qux');
 });

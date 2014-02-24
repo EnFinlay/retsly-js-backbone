@@ -6,11 +6,10 @@
   "dependencies": {
     "jashkenas/underscore": "*",
     "jashkenas/backbone": "*",
-    "components/jquery": "1.10.2"
+    "components/jquery": "1.10.2",
+    "Retsly/retsly-js-sdk": "*"
   },
-  "local": [
-    "retsly-js-sdk"
-  ],
+  "local": [ ],
   "development": {
     "timoxley/assert": "*",
     "visionmedia/mocha": "1.14.0"
