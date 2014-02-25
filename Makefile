@@ -1,5 +1,5 @@
 
-build: components index.js
+build: clean components index.js
 	@component build --dev
 
 dist: component.json index.js
