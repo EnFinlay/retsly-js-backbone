@@ -6,7 +6,7 @@ build:
         name: chown for npm
         code: sudo chown -R $USER /usr/local
     - npm-install:
-        options: -gf component mocha-phantomjs
+        options: -gf component0.19.9 mocha-phantomjs
     - script:
         name: make test
         code: make test
