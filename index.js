@@ -34,7 +34,7 @@ Retsly.Section = Backbone.View.extend({
 var Model = Retsly.Model = Backbone.Model.extend({
   defaults: {},
   idAttribute: '_id',
-  transport: 'socket',
+  transport: 'retsly',
   initialize: function(attrs, options) {
 
     if (options && !options.vendorID)
@@ -59,7 +59,7 @@ var Model = Retsly.Model = Backbone.Model.extend({
  * Retsly Parent Collection
  */
 var Collection = Retsly.Collection = Backbone.Collection.extend({
-  transport: 'socket',
+  transport: 'retsly',
   initialize: function(attrs, options) {
     if (options && !options.vendorID)
       throw new Error('requires vendorID `{vendorID: \'id\'}`');
@@ -145,8 +145,8 @@ Backbone.ajax = function(request) {
 };
 
 Backbone.getSyncMethod = function(model) {
-  if(model.transport == 'socket' || (model.collection && model.collection.transport == 'socket')) {
-    return Backbone.socket;
+  if(model.transport == 'retsly' || (model.collection && model.collection.transport == 'retsly')) {
+    return Backbone.retsly;
   }
   return Backbone.ajaxSync;
 };
@@ -155,9 +155,9 @@ Backbone.sync = function(method, model, options) {
   return Backbone.getSyncMethod(model).apply(this, [method, model, options]);
 };
 
-/* Main socket hack for rets.ly over socket.io */
+/* Use the Retsly sdk as transport */
 
-Backbone.socket = function(method, model, options) {
+Backbone.retsly = function(method, model, options) {
   var resp, errorMessage;
 
   // Alway wait for server to respond
@@ -246,45 +246,6 @@ Backbone.socket = function(method, model, options) {
       debug('--> get '+options.url, options.data || {});
       model.retsly.get(options.url, options.data, function(res) {
         debug('<-- get '+options.url, res);
-
-        if(res.bundle[0] && typeof res.bundle[0]._id !== 'undefined' && options.url.indexOf('photos') === -1) {
-
-          debug('--> subscribe:put '+options.url, options.query || {});
-          debug('--> subscribe:delete '+options.url, options.query || {});
-
-          each(res.bundle, function(item){
-            model.retsly.subscribe('put', options.url+'/'+item._id, {}, function(res) {
-              //TODO: Figure out why each listing gets fired here
-              if(res.id !== item._id) return;
-              debug('<-- subscribe:put '+options.url, res);
-              if(typeof model.get(res.id) === "undefined"){
-                if(typeof model.add === 'function') model.add(res.bundle);
-              } else {
-                model.get(res.id).set(res.bundle);
-                model.trigger('change', model.get(res.id), options, res);
-              }
-            });
-            model.retsly.subscribe('delete', options.url+'/'+item._id, {}, function(res) {
-              debug('<-- subscribe:delete '+options.url, res);
-              if(typeof model.get(res.id) !== "undefined"){
-                model.remove(res.bundle);
-              }
-            });
-          });
-
-          debug('--> subscribe:post '+options.url, options.query || {});
-          model.retsly.subscribe('post', options.url, {}, function(res) {
-            debug('<-- subscribe:post '+options.url, res);
-            if(typeof model.get(res.id) === "undefined"){
-              if(typeof model.add === 'function') model.add(res.bundle);
-            } else {
-              model.get(res.id).set(res.bundle);
-              model.trigger('change', model.get(res.id), options, res);
-            }
-          });
-
-        }
-
         if(res.success) {
           if(typeof options.success == 'function') options.success(res);
           model.trigger('reset', model, options, res);
