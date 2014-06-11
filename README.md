@@ -12,7 +12,7 @@ Install with [component](https://github.com/component/component):
 
 ```javascript
     var Retsly = require('retsly-backbone')
-    Retsly.create('CLIENT_ID');
+    Retsly.create('client_id', 'app_token');
 
     var listing = new Retsly.Models.Listing({_id: id, vendorID: vendor});
 
