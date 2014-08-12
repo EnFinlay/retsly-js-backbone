@@ -21,6 +21,10 @@ Install with [component](https://github.com/component/component):
     }});
 ```
 
+## Repo Owner
+
+[Jason Wan](http://github.com/jkhwan)
+
 ## License
 
 (The MIT License)
