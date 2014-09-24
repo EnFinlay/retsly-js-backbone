@@ -3,7 +3,7 @@
  * Dependencies
  */
 var assert = require('assert');
-var Retsly = require('retsly-backbone');
+var Retsly = require('retsly-js-backbone');
 
 /**
  * Tests
