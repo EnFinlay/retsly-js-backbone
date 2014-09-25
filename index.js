@@ -7,7 +7,7 @@ var $ = Backbone.$ = require('jquery');
 var extend = require('underscore').extend;
 var result = require('underscore').result;
 var each = require('underscore').each;
-var Retsly = require('retsly-sdk');
+var Retsly = require('retsly-js-sdk');
 
 
 /**

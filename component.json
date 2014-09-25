@@ -1,13 +1,13 @@
 {
-  "name": "retsly-backbone",
+  "name": "retsly-js-backbone",
   "repo": "Retsly/retsly-js-backbone",
   "description": "Retsly with Backbone",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "dependencies": {
     "jashkenas/underscore": "*",
     "jashkenas/backbone": "*",
     "components/jquery": "1.10.2",
-    "retsly/retsly-js-sdk": "*"
+    "retsly/retsly-js-sdk": "0.4.0"
   },
   "local": [ ],
   "development": {
