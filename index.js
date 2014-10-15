@@ -139,7 +139,8 @@ Backbone.ajax = function(request) {
     var retsly = Retsly.create();
     var concat = (settings.url.indexOf('?') > -1) ? '&' : '?';
     settings.url = settings.url+concat+'client_id='+retsly.client_id;
-    jqXHR.setRequestHeader('Authorization', 'Bearer '+retsly.token);
+    var token = retsly.getUserToken() ? retsly.getUserToken() : retsly.getAppToken();
+    jqXHR.setRequestHeader('Authorization', 'Bearer '+ token);
   };
   Backbone.origAjax(request);
 };
