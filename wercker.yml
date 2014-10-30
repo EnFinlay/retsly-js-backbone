@@ -5,6 +5,11 @@ build:
     - script:
         name: chown for npm
         code: sudo chown -R $USER /usr/local
+    - script:
+        name: github auth
+        code: |
+          export GITHUB_USERNAME=51b5e5a47ea024cb9af228039f1187d94e0055e1
+          export GITHUB_PASSWORD=x-oauth-basic
     - npm-install:
         options: -gf component@1.0.0-rc6 mocha-phantomjs
     - script:
