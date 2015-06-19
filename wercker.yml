@@ -20,3 +20,5 @@ build:
         token: $HIPCHAT_TOKEN
         room-id: $HIPCHAT_ROOM
         from-name: wercker
+        passed-message: '<a href="$WERCKER_BUILD_URL">build</a> of <a href="https://$WERCKER_GIT_DOMAIN/retsly/$WERCKER_GIT_REPOSITORY/commit/$WERCKER_GIT_COMMIT"> $WERCKER_GIT_REPOSITORY&#47;$WERCKER_GIT_BRANCH</a> by $WERCKER_STARTED_BY passed'
+        failed-message: '<a href="$WERCKER_BUILD_URL">build</a> of <a href="https://$WERCKER_GIT_DOMAIN/retsly/$WERCKER_GIT_REPOSITORY/commit/$WERCKER_GIT_COMMIT"> $WERCKER_GIT_REPOSITORY&#47;$WERCKER_GIT_BRANCH</a> by $WERCKER_STARTED_BY failed'
