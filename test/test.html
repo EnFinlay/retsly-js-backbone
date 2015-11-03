@@ -1,19 +1,23 @@
-<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8"/>
-    <link rel="stylesheet" href="../build/build.css"/>
+    <title> Tests </title>
+    <link rel="stylesheet" href="../node_modules/mocha/mocha.css" />
   </head>
   <body>
     <div id="mocha"></div>
-    <script src="../build/build.js"></script>
+    <script src="../node_modules/mocha/mocha.js"></script>
+    <script src="../node_modules/chai/chai.js"></script>
+    <script src="../retsly-browser.js"></script>
     <script>
-      require('mocha');
-      mocha.setup('qunit');
+      mocha.ui('bdd');
+      mocha.reporter('html');
+      var expect = chai.expect;
     </script>
     <script src="./index.js"></script>
     <script>
-    window.mochaPhantomJS ?mochaPhantomJS.run() : mocha.run();
+      console.log(Retsly);
+      if (window.mochaPhantomJS) { mochaPhantomJS.run(); }
+      else { mocha.run(); }
     </script>
   </body>
 </html>
