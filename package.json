@@ -14,10 +14,12 @@
     "underscore": "^1.8.3"
   },
   "devDependencies": {
+    "chai": "^3.4.0",
+    "mocha": "^2.3.3",
     "mocha-phantomjs": "^4.0.1"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node_modules/.bin/mocha-phantomjs test/test.html",
     "build": "browserify index.js -o retsly-browser.js -s Retsly",
     "postinstall": "npm run build && echo Retsly-JS-Backbone built"
   },

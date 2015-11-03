@@ -3,7 +3,7 @@ dist:
 
 test:
 	@make dist
-	@node_modules/.bin/mocha-phantomjs test/test.html
+	@npm test
 
 clean:
 	@rm -fr node_modulesbuild components
