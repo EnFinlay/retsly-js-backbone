@@ -73,6 +73,12 @@ Include the the script in your header
   </head>
 ```
 
+**NOTE:**
+
+If you are testing on `localhost`. It is important to update your Http Referre Doman and OAuth settings in your application settings to match you testing url.
+
+![](https://cloud.githubusercontent.com/assets/3782456/10923689/4ce864ac-8237-11e5-8391-437c9fe99b91.png)
+
 ## API
 ### Retsly.create( _clientId_, _browserToken_ )
 
