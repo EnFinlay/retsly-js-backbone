@@ -6,22 +6,86 @@ Use [Retsly](https://rets.ly/) with Backbone.
 
 ## Install
 
-Install with [component](https://github.com/component/component):
-
-    $ component install retsly/retsly-js-backbone
+Javascript
+```sh
+  npm install --save retsly-js-backbone
+```
 
 ## Usage
 
+Get a collection of listings
+
 ```javascript
-    var Retsly = require('retsly-backbone')
-    Retsly.create('client_id', 'app_token');
 
-    var listing = new Retsly.Models.Listing({_id: id, vendorID: vendor});
+  /**
+   * Main.js
+   */
 
-    listing.fetch({success: function (listing) {
+  var Retsly = require('retsly-js-backbone')
+
+  // Enter your credentials
+  Retsly.create(<clientId>, <browserToken>);
+
+  var collection = new Retsly.Collections.Listings({vendorID: <vendorID>});
+
+  // Fetch collection
+  collection.fetch({success: function (response) {
+
+    // response is a collection of listing models
+
+    // Optional step - Fetch a specific model
+    // Option 1: Enter an ID
+    var firstListing = response.models[0];
+    var listing = new Retsly.Models.Listing({_id: firstListing.get('id'), vendorID: <vendorID>});
+
+    listing.fetch({success: function (item) {
       // do something with listing
+      console.log(item);
     }});
+
+    // Option 2: Call fetch directly on the model
+    firstListing.fetch({success: function (item) {
+      // do something with listing
+      console.log(item);
+    }});
+
+  }});
 ```
+
+If using in the browser:
+
+```sh
+  browserify main.js -o <new file name>
+```
+
+## API
+### Retsly.create(_clientId_, _browserToken_)
+
+- {String} client_id
+- {String} browser_token
+
+### Retsly.Collections.#END_POINT(vendorID: _vendorID_)
+
+- {Method} END_POINT
+ - Listings
+ - Agents
+ - Offices
+ - OpenHouses
+ - Vendors
+ - Parcels
+ - Assessments
+ - Transactions
+
+- {String} vendorID
+
+Sets the user tokens and ids
+
+
+Everything else is the same as backbone commands
+
+- collection.fetch(cb)
+
+Now you can include <new file name> anywhere that you need to use it.
 
 ## Repo Owner
 

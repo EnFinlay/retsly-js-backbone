@@ -118,6 +118,7 @@ models.Media = Model.extend({fragment: 'media'});
 models.Vendor = Model.extend({fragment: 'vendors'});
 models.Parcel = Model.extend({fragment: 'parcels'});
 models.Assessment = Model.extend({fragment: 'assessments'});
+models.Transaction = Model.extend({fragment: 'transactions'});
 
 
 /**
@@ -133,6 +134,7 @@ collections.Medias = Collection.extend({fragment: 'media', Model: models.Media})
 collections.Vendors = Collection.extend({fragment: 'vendors', Model: models.Vendor});
 collections.Parcels = Collection.extend({fragment: 'parcels', Model: models.Parcel});
 collections.Assessments = Collection.extend({fragment: 'assessments', Model: models.Assessment});
+collections.Transactions = Collection.extend({fragment: 'transactions', Model: models.Transaction});
 
 
 collections.Photos = Collection.extend({
