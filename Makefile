@@ -6,7 +6,7 @@ test:
 	@npm test
 
 clean:
-	@rm -fr node_modulesbuild components
+	@rm -fr node_modules
 	@npm install
 
 .PHONY: clean test

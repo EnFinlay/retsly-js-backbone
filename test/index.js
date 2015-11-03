@@ -3,15 +3,15 @@
  */
 describe("Retsly Backbone", function () {
   it('Has loaded', function () {
-    expect(Retsly).to.exist;
+    expect(RetslyBackbone).to.exist;
   })
 
   it('Has Model', function () {
-    expect(Retsly.Model).to.exist;
+    expect(RetslyBackbone.Model).to.exist;
   })
 
   it('Has Collection', function () {
-    expect(Retsly.Collection).to.exist;
+    expect(RetslyBackbone.Collection).to.exist;
   })
 
   it('Model#url()', function () {
@@ -21,6 +21,21 @@ describe("Retsly Backbone", function () {
       fragment: 'listings',
       vendorID: 'test'
     };
-    expect(Retsly.Model.prototype.url.call(mock)).to.equal('/api/v1/test/listings/query');
+    expect(RetslyBackbone.Model.prototype.url.call(mock)).to.equal('/api/v1/test/listings/query');
+  });
+})
+
+describe("Get collection", function () {
+  it('Gets listings collection', function (done) {
+    RetslyBackbone.create('<USER CLIENT ID>', '6baca547742c6f96a6ff71b138424f21');
+
+    var collection = new RetslyBackbone.Collections.Listings({vendorID: 'test'});
+
+    // Fetch collection
+    collection.fetch({success: function (response) {
+      expect(response).to.exist;
+      expect(response.models).to.have.length(10);
+      done();
+    }})
   });
 })

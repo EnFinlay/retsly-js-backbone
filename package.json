@@ -1,6 +1,6 @@
 {
   "name": "retsly-js-backbone",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Backbone integration of Retsly-js-sdk",
   "main": "index.js",
   "directories": {
@@ -19,8 +19,8 @@
     "mocha-phantomjs": "^4.0.1"
   },
   "scripts": {
-    "test": "node_modules/.bin/mocha-phantomjs test/test.html",
-    "build": "node_modules/.bin/browserify index.js -o retsly-browser.js -s Retsly",
+    "test": "node_modules/.bin/mocha-phantomjs --ssl-protocol=any --ignore-ssl-errors=true test/test.html --timeout 100000",
+    "build": "node_modules/.bin/browserify index.js -o retsly-browser.js -s RetslyBackbone",
     "postinstall": "npm run build && echo Retsly-JS-Backbone built"
   },
   "repository": {

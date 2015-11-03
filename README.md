@@ -4,11 +4,17 @@
 
 Use [Retsly](https://rets.ly/) with Backbone.
 
-## Install
+## Install with npm
 
-Javascript
 ```sh
   npm install --save retsly-js-backbone
+```
+## Install directly from github
+
+```sh
+  git clone https://github.com/Retsly/retsly-js-backbone.git
+  cd retsly-js-backbone
+  npm install # this will also build the javascript
 ```
 
 ## Usage
@@ -21,12 +27,12 @@ Get a collection of listings
    * Main.js
    */
 
-  var Retsly = require('retsly-js-backbone')
+  var RetslyBackbone = require('retsly-js-backbone')
 
   // Enter your credentials
-  Retsly.create(<clientId>, <browserToken>);
+  RetslyBackbone.create(<clientId>, <browserToken>);
 
-  var collection = new Retsly.Collections.Listings({vendorID: <vendorID>});
+  var collection = new RetslyBackbone.Collections.Listings({vendorID: <vendorID>});
 
   // Fetch collection
   collection.fetch({success: function (response) {
@@ -38,7 +44,7 @@ Get a collection of listings
     var firstListing = response.models[0];
 
     // Option 1: Enter an ID
-    var listing = new Retsly.Models.Listing({_id: firstListing.get('id'), vendorID: <vendorID>});
+    var listing = new RetslyBackbone.Models.Listing({_id: firstListing.get('id'), vendorID: <vendorID>});
 
     listing.fetch({success: function (item) {
       // do something with listing
