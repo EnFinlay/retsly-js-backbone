@@ -32,10 +32,12 @@ Get a collection of listings
   collection.fetch({success: function (response) {
 
     // response is a collection of listing models
+    // do something with response
 
     // Optional step - Fetch a specific model
-    // Option 1: Enter an ID
     var firstListing = response.models[0];
+
+    // Option 1: Enter an ID
     var listing = new Retsly.Models.Listing({_id: firstListing.get('id'), vendorID: <vendorID>});
 
     listing.fetch({success: function (item) {
@@ -52,21 +54,38 @@ Get a collection of listings
   }});
 ```
 
-If using in the browser:
+To run in your browser:
 
 ```sh
-  browserify main.js -o <new file name>
+  browserify main.js -o <srcName>.js
+```
+
+Include the the script in your header
+```html
+  <head>
+    <script src="<srcName>.js"></script>
+  </head>
 ```
 
 ## API
-### Retsly.create(_clientId_, _browserToken_)
+### Retsly.create( _clientId_, _browserToken_ )
+
+Example
+```js
+  Retsly.create('asdfkjhgkl', '1234876590abc');
+```
 
 - {String} client_id
 - {String} browser_token
 
-### Retsly.Collections.#END_POINT(vendorID: _vendorID_)
+### Retsly.Collections.#RESOURCE( { vendorID: _vendorID_ } )
 
-- {Method} END_POINT
+Example
+```js
+  var collection = new Retsly.Collections.Listings({vendorID: 'test'});
+```
+
+##### #RESOURCE:
  - Listings
  - Agents
  - Offices
@@ -77,15 +96,15 @@ If using in the browser:
  - Transactions
 
 - {String} vendorID
-
 Sets the user tokens and ids
 
+More info regarding Resources can be found in the [Retsly Documentation](https://rets.ly/docs/retsly/index.html#hero)
 
-Everything else is the same as backbone commands
+To Fetch is the same as the Backbone commands.
 
 - collection.fetch(cb)
 
-Now you can include <new file name> anywhere that you need to use it.
+More info regarding backbone can be found from the [Backbone Documentation](http://backbonejs.org/)
 
 ## Repo Owner
 
