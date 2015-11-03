@@ -37,6 +37,10 @@ var Model = Retsly.Model = Backbone.Model.extend({
   transport: 'retsly',
   initialize: function(attrs, options) {
 
+    // If there is no options, then set options to first input
+    if (attrs && !options)
+      options = attrs;
+
     if (options && !options.vendorID)
       throw new Error('requires vendorID `{vendorID: \'id\'}`');
 
@@ -48,8 +52,8 @@ var Model = Retsly.Model = Backbone.Model.extend({
   url: function() {
     return [
         this.options.urlBase,
-        this.fragment,
         this.vendorID,
+        this.fragment,
         this.get('_id')
       ].join('/');
   }
@@ -61,6 +65,11 @@ var Model = Retsly.Model = Backbone.Model.extend({
 var Collection = Retsly.Collection = Backbone.Collection.extend({
   transport: 'retsly',
   initialize: function(attrs, options) {
+
+    // If there is no options, then set options to first input
+    if (attrs && !options)
+      options = attrs;
+
     if (options && !options.vendorID)
       throw new Error('requires vendorID `{vendorID: \'id\'}`');
 
@@ -75,8 +84,8 @@ var Collection = Retsly.Collection = Backbone.Collection.extend({
   url: function() {
     return [
         this.options.urlBase,
-        this.fragment,
-        this.vendorID
+        this.vendorID,
+        this.fragment
       ].join('/');
   }
 });
@@ -90,16 +99,14 @@ models.Photo = Model.extend({fragment: 'photo'});
 models.Agent = Model.extend({fragment: 'agent'});
 models.Office = Model.extend({fragment: 'office'});
 models.Listing = Model.extend({fragment: 'listing'});
-models.Geography = Model.extend({fragment: 'geography'});
 
 /**
 * Retsly Collections
 */
 var collections = Retsly.Collections = {};
-collections.Agents = Collection.extend({fragment: 'agent', Model: models.Agent});
-collections.Offices = Collection.extend({fragment: 'office', Model: models.Office});
-collections.Listings = Collection.extend({fragment: 'listing', Model: models.Listing});
-collections.Geographies = Collection.extend({fragment: 'geography', Model: models.Geography});
+collections.Agents = Collection.extend({fragment: 'agents', Model: models.Agent});
+collections.Offices = Collection.extend({fragment: 'offices', Model: models.Office});
+collections.Listings = Collection.extend({fragment: 'listings', Model: models.Listing});
 
 collections.Photos = Collection.extend({
   fragment: 'photo',
