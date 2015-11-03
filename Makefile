@@ -1,8 +1,8 @@
 dist:
-	npm run build
+	@npm run build
 
 test:
-	@make dist
+	@npm run build
 	@npm test
 
 clean:
