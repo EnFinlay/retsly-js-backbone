@@ -81,8 +81,8 @@ Example
   Retsly.create('asdfkjhgkl', '1234876590abc');
 ```
 
-- {String} client_id
-- {String} browser_token
+- {String} clientId
+- {String} browserToken
 
 ### Retsly.Collections.#RESOURCE( { vendorID: _vendorID_ } )
 
@@ -106,11 +106,11 @@ Sets the user tokens and ids
 
 More info regarding Resources can be found in the [Retsly Documentation](https://rets.ly/docs/retsly/index.html#hero)
 
-To Fetch is the same as the Backbone commands.
+To get listings is the same as the Backbone `fetch` commands.
 
 - collection.fetch(cb)
 
-More info regarding backbone can be found from the [Backbone Documentation](http://backbonejs.org/)
+More info regarding backbone can be found in the [Backbone Documentation](http://backbonejs.org/)
 
 ## Repo Owner
 
