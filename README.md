@@ -4,24 +4,113 @@
 
 Use [Retsly](https://rets.ly/) with Backbone.
 
-## Install
+## Install with npm
 
-Install with [component](https://github.com/component/component):
+```sh
+  npm install --save retsly-js-backbone
+```
+## Install directly from github
 
-    $ component install retsly/retsly-js-backbone
+```sh
+  git clone https://github.com/Retsly/retsly-js-backbone.git
+  cd retsly-js-backbone
+  npm install # this will also build the javascript
+```
 
 ## Usage
 
+Get a collection of listings
+
 ```javascript
-    var Retsly = require('retsly-backbone')
-    Retsly.create('client_id', 'app_token');
 
-    var listing = new Retsly.Models.Listing({_id: id, vendorID: vendor});
+  /**
+   * Main.js
+   */
 
-    listing.fetch({success: function (listing) {
+  var RetslyBackbone = require('retsly-js-backbone')
+
+  // Enter your credentials
+  RetslyBackbone.create(<clientId>, <browserToken>);
+
+  var collection = new RetslyBackbone.Collections.Listings({vendorID: <vendorID>});
+
+  // Fetch collection
+  collection.fetch({success: function (response) {
+
+    // response is a collection of listing models
+    // do something with response
+
+    // Optional step - Fetch a specific model
+    var firstListing = response.models[0];
+
+    // Option 1: Enter an ID
+    var listing = new RetslyBackbone.Models.Listing({_id: firstListing.get('id'), vendorID: <vendorID>});
+
+    listing.fetch({success: function (item) {
       // do something with listing
+      console.log(item);
     }});
+
+    // Option 2: Call fetch directly on the model
+    firstListing.fetch({success: function (item) {
+      // do something with listing
+      console.log(item);
+    }});
+
+  }});
 ```
+
+To run in your browser:
+
+```sh
+  browserify main.js -o <srcName>.js
+```
+
+Include the the script in your header
+```html
+  <head>
+    <script src="<srcName>.js"></script>
+  </head>
+```
+
+## API
+### Retsly.create( _clientId_, _browserToken_ )
+
+Example
+```js
+  Retsly.create('asdfkjhgkl', '1234876590abc');
+```
+
+- {String} clientId
+- {String} browserToken
+
+### Retsly.Collections.#RESOURCE( { vendorID: _vendorID_ } )
+
+Example
+```js
+  var collection = new Retsly.Collections.Listings({vendorID: 'test'});
+```
+
+##### #RESOURCE:
+ - Listings
+ - Agents
+ - Offices
+ - OpenHouses
+ - Vendors
+ - Parcels
+ - Assessments
+ - Transactions
+
+- {String} vendorID
+Sets the user tokens and ids
+
+More info regarding Resources can be found in the [Retsly Documentation](https://rets.ly/docs/retsly/index.html#hero)
+
+To get listings is the same as the Backbone `fetch` commands.
+
+- collection.fetch(cb)
+
+More info regarding backbone can be found in the [Backbone Documentation](http://backbonejs.org/)
 
 ## Repo Owner
 

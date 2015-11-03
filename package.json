@@ -1,0 +1,41 @@
+{
+  "name": "retsly-js-backbone",
+  "version": "1.0.1",
+  "description": "Backbone integration of Retsly-js-sdk",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "backbone": "^1.2.3",
+    "browserify": "^12.0.1",
+    "jquery": "^2.1.4",
+    "retsly-js-sdk": "^0.8.3",
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "chai": "^3.4.0",
+    "mocha": "^2.3.3",
+    "mocha-phantomjs": "^4.0.1"
+  },
+  "scripts": {
+    "test": "node_modules/.bin/mocha-phantomjs --ssl-protocol=any --ignore-ssl-errors=true test/test.html --timeout 100000",
+    "build": "node_modules/.bin/browserify index.js -o retsly-browser.js -s RetslyBackbone",
+    "postinstall": "npm run build && echo Retsly-JS-Backbone built"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Retsly/retsly-js-backbone.git"
+  },
+  "keywords": [
+    "retsly",
+    "backbone",
+    "sdk"
+  ],
+  "author": "Jason Wan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Retsly/retsly-js-backbone/issues"
+  },
+  "homepage": "https://github.com/Retsly/retsly-js-backbone#readme"
+}

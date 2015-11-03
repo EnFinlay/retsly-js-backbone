@@ -33,9 +33,13 @@ Retsly.Section = Backbone.View.extend({
  */
 var Model = Retsly.Model = Backbone.Model.extend({
   defaults: {},
-  idAttribute: '_id',
+  idAttribute: 'id',
   transport: 'retsly',
   initialize: function(attrs, options) {
+
+    // If there is no options, then set options to first input
+    if (attrs && !options)
+      options = attrs;
 
     if (options && !options.vendorID)
       throw new Error('requires vendorID `{vendorID: \'id\'}`');
@@ -46,10 +50,17 @@ var Model = Retsly.Model = Backbone.Model.extend({
     this.vendorID = this.options.vendorID;
   },
   url: function() {
+    if (this.fragment === 'vendors') {
+      return [
+          this.options.urlBase,
+          this.fragment,
+          this.vendorID
+        ].join('/');
+    }
     return [
         this.options.urlBase,
-        this.fragment,
         this.vendorID,
+        this.fragment,
         this.get('_id')
       ].join('/');
   }
@@ -61,6 +72,11 @@ var Model = Retsly.Model = Backbone.Model.extend({
 var Collection = Retsly.Collection = Backbone.Collection.extend({
   transport: 'retsly',
   initialize: function(attrs, options) {
+
+    // If there is no options, then set options to first input
+    if (attrs && !options)
+      options = attrs;
+
     if (options && !options.vendorID)
       throw new Error('requires vendorID `{vendorID: \'id\'}`');
 
@@ -73,10 +89,17 @@ var Collection = Retsly.Collection = Backbone.Collection.extend({
     return new col.Model(attrs, { collection: col, vendorID: col.vendorID });
   },
   url: function() {
+    if (this.fragment === 'vendors') {
+      return [
+          this.options.urlBase,
+          this.fragment,
+          this.vendorID
+        ].join('/');
+    }
     return [
         this.options.urlBase,
-        this.fragment,
-        this.vendorID
+        this.vendorID,
+        this.fragment
       ].join('/');
   }
 });
@@ -86,20 +109,33 @@ var Collection = Retsly.Collection = Backbone.Collection.extend({
  * Retsly models
  */
 var models = Retsly.Models = {};
-models.Photo = Model.extend({fragment: 'photo'});
-models.Agent = Model.extend({fragment: 'agent'});
-models.Office = Model.extend({fragment: 'office'});
-models.Listing = Model.extend({fragment: 'listing'});
-models.Geography = Model.extend({fragment: 'geography'});
+models.Agent = Model.extend({fragment: 'agents'});
+models.Office = Model.extend({fragment: 'offices'});
+models.Listing = Model.extend({fragment: 'listings'});
+models.Agent = Model.extend({fragment: 'agents'});
+models.OpenHouse = Model.extend({fragment: 'openhouses'});
+models.Media = Model.extend({fragment: 'media'});
+models.Vendor = Model.extend({fragment: 'vendors'});
+models.Parcel = Model.extend({fragment: 'parcels'});
+models.Assessment = Model.extend({fragment: 'assessments'});
+models.Transaction = Model.extend({fragment: 'transactions'});
+
 
 /**
 * Retsly Collections
 */
 var collections = Retsly.Collections = {};
-collections.Agents = Collection.extend({fragment: 'agent', Model: models.Agent});
-collections.Offices = Collection.extend({fragment: 'office', Model: models.Office});
-collections.Listings = Collection.extend({fragment: 'listing', Model: models.Listing});
-collections.Geographies = Collection.extend({fragment: 'geography', Model: models.Geography});
+collections.Agents = Collection.extend({fragment: 'agents', Model: models.Agent});
+collections.Offices = Collection.extend({fragment: 'offices', Model: models.Office});
+collections.Listings = Collection.extend({fragment: 'listings', Model: models.Listing});
+collections.Agents = Collection.extend({fragment: 'agents', Model: models.Agent});
+collections.OpenHouses = Collection.extend({fragment: 'openhouses', Model: models.OpenHouse});
+collections.Medias = Collection.extend({fragment: 'media', Model: models.Media});
+collections.Vendors = Collection.extend({fragment: 'vendors', Model: models.Vendor});
+collections.Parcels = Collection.extend({fragment: 'parcels', Model: models.Parcel});
+collections.Assessments = Collection.extend({fragment: 'assessments', Model: models.Assessment});
+collections.Transactions = Collection.extend({fragment: 'transactions', Model: models.Transaction});
+
 
 collections.Photos = Collection.extend({
   fragment: 'photo',
@@ -116,7 +152,7 @@ collections.Photos = Collection.extend({
 });
 
 // Mongo-friendly by default
-Backbone.Model.prototype.idAttribute = '_id';
+Backbone.Model.prototype.idAttribute = 'id';
 
 /**
  * HTTP uses response.bundle, sockets use response. Normalize them.

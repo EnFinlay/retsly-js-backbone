@@ -1,18 +1,12 @@
+dist:
+	@npm run build
 
-build: clean components index.js
-	@component build --dev
-
-dist: component.json index.js
-	@component install
-	@component build -s Retsly -o . -n retsly-backbone
-
-components: component.json
-	@component install --dev
-
-test: build
-	@mocha-phantomjs test/test.html
+test:
+	@npm run build
+	@npm test
 
 clean:
-	@rm -fr build components
+	@rm -fr node_modules
+	@npm install
 
 .PHONY: clean test
