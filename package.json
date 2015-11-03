@@ -1,6 +1,6 @@
 {
   "name": "retsly-js-backbone",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Backbone integration of Retsly-js-sdk",
   "main": "index.js",
   "directories": {
